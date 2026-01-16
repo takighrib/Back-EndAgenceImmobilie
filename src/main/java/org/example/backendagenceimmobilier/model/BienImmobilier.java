@@ -1,6 +1,8 @@
 package org.example.backendagenceimmobilier.model;
 
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +12,19 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "typeBien"  // nom du champ dans le JSON qui dira quel type concret instancier
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Appartement.class, name = "Appartement"),
+        @JsonSubTypes.Type(value = Maison.class, name = "Maison"),
+        @JsonSubTypes.Type(value = Bureau.class, name = "Bureau"),
+        @JsonSubTypes.Type(value = Terrain.class, name = "Terrain"),
+        @JsonSubTypes.Type(value = Villa.class, name = "Villa")
+})
 @Entity
 @Table(name = "bien_immobilier")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -85,3 +100,4 @@ public abstract class BienImmobilier {
         return this.getClass().getSimpleName();
     }
 }
+

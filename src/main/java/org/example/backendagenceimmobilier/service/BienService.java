@@ -1,6 +1,7 @@
 package org.example.backendagenceimmobilier.service;
 
 import org.example.backendagenceimmobilier.model.BienImmobilier;
+import org.example.backendagenceimmobilier.model.ImageBien;
 import org.example.backendagenceimmobilier.model.StatutBien;
 import org.example.backendagenceimmobilier.model.TypeTransaction;
 import org.example.backendagenceimmobilier.repository.BienImmobilierRepository;
@@ -53,6 +54,11 @@ public class BienService {
     }
 
     public BienImmobilier saveBien(BienImmobilier bien) {
+        if (bien.getImages() != null) {
+            for (ImageBien img : bien.getImages()) {
+                img.setBien(bien); // Associer chaque image au bien parent
+            }
+        }
         return bienRepository.save(bien);
     }
 
