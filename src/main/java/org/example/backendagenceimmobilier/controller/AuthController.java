@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 
     private final AuthService authService;
@@ -23,11 +23,13 @@ public class AuthController {
     }
 
     @PostMapping("/validate")
-    public ResponseEntity<Boolean> validateToken(@RequestHeader("Authorization") String token) {
-        // Retirer "Bearer " du token si présent
-        String actualToken = token.startsWith("Bearer ") ? token.substring(7) : token;
-        boolean isValid = authService.validateToken(actualToken);
-        return ResponseEntity.ok(isValid);
+    public ResponseEntity<Boolean> validateToken(@RequestHeader("Authorization") String authHeader) {
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            boolean isValid = authService.validateToken(token);
+            return ResponseEntity.ok(isValid);
+        }
+        return ResponseEntity.ok(false);
     }
 
     @PostMapping("/init")

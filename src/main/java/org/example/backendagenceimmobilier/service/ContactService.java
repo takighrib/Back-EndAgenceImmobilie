@@ -36,6 +36,26 @@ public class ContactService {
                     return contactRepository.save(contact);
                 });
     }
+    public Optional<ContactDemande> getContactById(Long id) {
+        return contactRepository.findById(id);
+    }
+
+    public Optional<ContactDemande> updateContact(Long id, ContactDemande contactDetails) {
+        return contactRepository.findById(id)
+                .map(existing -> {
+                    existing.setNom(contactDetails.getNom());
+                    existing.setPrenom(contactDetails.getPrenom());
+                    existing.setEmail(contactDetails.getEmail());
+                    existing.setTelephone(contactDetails.getTelephone());
+                    existing.setMessage(contactDetails.getMessage());
+                    existing.setStatut(contactDetails.getStatut());
+                    if (contactDetails.getBien() != null) {
+                        existing.setBien(contactDetails.getBien());
+                    }
+
+                    return contactRepository.save(existing);
+                });
+    }
 
     public void deleteContact(Long id) {
         contactRepository.deleteById(id);

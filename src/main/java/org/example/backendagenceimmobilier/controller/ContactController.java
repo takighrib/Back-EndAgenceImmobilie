@@ -28,6 +28,22 @@ public class ContactController {
     public ResponseEntity<List<ContactDemande>> getAllContacts() {
         return ResponseEntity.ok(contactService.getAllContacts());
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<ContactDemande> getContactById(@PathVariable Long id) {
+        return contactService.getContactById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // ✅ PUT pour mettre à jour un contact complet
+    @PutMapping("/{id}")
+    public ResponseEntity<ContactDemande> updateContact(
+            @PathVariable Long id,
+            @Valid @RequestBody ContactDemande contact) {
+        return contactService.updateContact(id, contact)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
     @GetMapping("/statut/{statut}")
     public ResponseEntity<List<ContactDemande>> getContactsByStatut(@PathVariable String statut) {
