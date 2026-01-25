@@ -11,23 +11,28 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+
 @Repository
 public interface BienImmobilierRepository extends JpaRepository<BienImmobilier, Long> {
 
-    // Trouver tous les biens disponibles
-    List<BienImmobilier> findByStatut(StatutBien statut);
+    // ✅ Correction : Utiliser une requête JPQL avec JOIN FETCH
+    @Query("SELECT DISTINCT b FROM BienImmobilier b LEFT JOIN FETCH b.images WHERE b.statut = :statut")
+    List<BienImmobilier> findByStatut(@Param("statut") StatutBien statut);
 
-    // Trouver les biens mis en avant
+    // ✅ Correction : Ajouter JOIN FETCH
+    @Query("SELECT DISTINCT b FROM BienImmobilier b LEFT JOIN FETCH b.images WHERE b.misEnAvant = true ORDER BY b.ordreAffichage ASC")
     List<BienImmobilier> findByMisEnAvantTrueOrderByOrdreAffichageAsc();
 
-    // Trouver par ville
-    List<BienImmobilier> findByVilleContainingIgnoreCase(String ville);
+    // ✅ Correction : Ajouter JOIN FETCH
+    @Query("SELECT DISTINCT b FROM BienImmobilier b LEFT JOIN FETCH b.images WHERE LOWER(b.ville) LIKE LOWER(CONCAT('%', :ville, '%'))")
+    List<BienImmobilier> findByVilleContainingIgnoreCase(@Param("ville") String ville);
 
-    // Trouver par type de transaction
-    List<BienImmobilier> findByTypeTransaction(TypeTransaction typeTransaction);
+    // ✅ Correction : Ajouter JOIN FETCH
+    @Query("SELECT DISTINCT b FROM BienImmobilier b LEFT JOIN FETCH b.images WHERE b.typeTransaction = :typeTransaction")
+    List<BienImmobilier> findByTypeTransaction(@Param("typeTransaction") TypeTransaction typeTransaction);
 
-    // Recherche avancée
-    @Query("SELECT b FROM BienImmobilier b WHERE " +
+    // Recherche avancée - déjà correcte
+    @Query("SELECT DISTINCT b FROM BienImmobilier b LEFT JOIN FETCH b.images WHERE " +
             "(:ville IS NULL OR LOWER(b.ville) LIKE LOWER(CONCAT('%', :ville, '%'))) AND " +
             "(:prixMin IS NULL OR b.prix >= :prixMin) AND " +
             "(:prixMax IS NULL OR b.prix <= :prixMax) AND " +
@@ -43,7 +48,7 @@ public interface BienImmobilierRepository extends JpaRepository<BienImmobilier, 
             @Param("typeTransaction") TypeTransaction typeTransaction
     );
 
-    // Trouver les biens récents
-    @Query("SELECT b FROM BienImmobilier b WHERE b.statut = 'DISPONIBLE' ORDER BY b.datePublication DESC")
+    // Trouver les biens récents - déjà correcte
+    @Query("SELECT DISTINCT b FROM BienImmobilier b LEFT JOIN FETCH b.images WHERE b.statut = 'DISPONIBLE' ORDER BY b.datePublication DESC")
     List<BienImmobilier> findBiensRecents();
 }

@@ -1,6 +1,5 @@
 package org.example.backendagenceimmobilier.model;
 
-
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
@@ -12,11 +11,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
-        include = JsonTypeInfo.As.PROPERTY,
-        property = "typeBien"  // nom du champ dans le JSON qui dira quel type concret instancier
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "typeBien",
+        visible = true
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Appartement.class, name = "Appartement"),
@@ -50,11 +49,8 @@ public abstract class BienImmobilier {
     private String ville;
 
     private String codePostal;
-
     private String quartier;
-
     private Double latitude;
-
     private Double longitude;
 
     @Column(nullable = false)
@@ -81,8 +77,14 @@ public abstract class BienImmobilier {
 
     private Integer ordreAffichage = 0;
 
-    @OneToMany(mappedBy = "bien", cascade = CascadeType.ALL, orphanRemoval = true)
+    // ✅ CORRECTION : Relation unidirectionnelle simplifiée
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "bien_id")
     private List<ImageBien> images = new ArrayList<>();
+
+    // ✅ NOUVELLE APPROCHE : Champ persisté en base
+    @Column(name = "type_bien", insertable = false, updatable = false)
+    private String typeBien;
 
     @PrePersist
     protected void onCreate() {
@@ -95,9 +97,11 @@ public abstract class BienImmobilier {
         dateModification = LocalDateTime.now();
     }
 
-    // Méthode utilitaire pour obtenir le type de bien
-    public String getTypeBien() {
-        return this.getClass().getSimpleName();
+    // ✅ Méthode pour obtenir le type dynamiquement
+    @PostLoad
+    @PostPersist
+    @PostUpdate
+    protected void updateTypeBien() {
+        this.typeBien = this.getClass().getSimpleName();
     }
 }
-

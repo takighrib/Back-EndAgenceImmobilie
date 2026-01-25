@@ -1,6 +1,5 @@
 package org.example.backendagenceimmobilier.model;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -32,9 +31,20 @@ public class ImageBien {
     @JsonIgnore
     private BienImmobilier bien;
 
+    // Constructeur sans le bien
     public ImageBien(String urlImage, Integer ordre, Boolean estPrincipale) {
         this.urlImage = urlImage;
         this.ordre = ordre;
         this.estPrincipale = estPrincipale;
+    }
+
+    // ✅ Ajouter explicitement le setter pour bien
+    public void setBien(BienImmobilier bien) {
+        this.bien = bien;
+    }
+
+    // ✅ Ajouter explicitement le getter pour bien
+    public BienImmobilier getBien() {
+        return this.bien;
     }
 }

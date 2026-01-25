@@ -60,10 +60,26 @@ public class BienController {
         return ResponseEntity.ok(biens);
     }
 
-    // Endpoints pour l'administration (à sécuriser plus tard)
     @PostMapping
     public ResponseEntity<BienImmobilier> createBien(@Valid @RequestBody BienImmobilier bien) {
+        System.out.println("═══════════════════════════════════════");
+        System.out.println("📥 Réception du bien à créer");
+        System.out.println("Type: " + bien.getClass().getSimpleName());
+        System.out.println("Titre: " + bien.getTitre());
+        System.out.println("Nombre d'images reçues: " + (bien.getImages() != null ? bien.getImages().size() : 0));
+
+        if (bien.getImages() != null) {
+            bien.getImages().forEach(img ->
+                    System.out.println("  - Image URL: " + img.getUrlImage())
+            );
+        }
+
         BienImmobilier saved = bienService.saveBien(bien);
+
+        System.out.println("✅ Bien créé avec ID: " + saved.getId());
+        System.out.println("   Images sauvegardées: " + saved.getImages().size());
+        System.out.println("═══════════════════════════════════════");
+
         return ResponseEntity.ok(saved);
     }
 

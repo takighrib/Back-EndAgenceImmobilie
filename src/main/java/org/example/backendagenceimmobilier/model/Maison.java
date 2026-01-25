@@ -3,6 +3,7 @@ package org.example.backendagenceimmobilier.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,4 +30,10 @@ public class Maison extends BienImmobilier {
     private Boolean piscine = false;
 
     private Boolean climatisation = false;
+
+    @Override
+    @Transient
+    public String getTypeBien() {
+        return "Appartement";
+    }
 }

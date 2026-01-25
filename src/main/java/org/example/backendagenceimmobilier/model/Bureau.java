@@ -3,6 +3,7 @@ package org.example.backendagenceimmobilier.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,4 +30,9 @@ public class Bureau extends BienImmobilier {
     private Integer etage;
 
     private Boolean ascenseur = false;
+    @Override
+    @Transient
+    public String getTypeBien() {
+        return "Appartement";
+    }
 }
