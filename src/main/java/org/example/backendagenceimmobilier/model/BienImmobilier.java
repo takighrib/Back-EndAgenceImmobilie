@@ -79,7 +79,6 @@ public abstract class BienImmobilier {
 
     // ✅ CORRECTION : Relation unidirectionnelle simplifiée
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "bien_id")
     private List<ImageBien> images = new ArrayList<>();
 
     // ✅ NOUVELLE APPROCHE : Champ persisté en base
