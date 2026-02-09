@@ -5,6 +5,7 @@ import org.example.backendagenceimmobilier.dto.LoginResponse;
 import org.example.backendagenceimmobilier.model.Admin;
 import org.example.backendagenceimmobilier.repository.AdminRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +14,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class AuthService {
 
     private final AdminRepository adminRepository;
@@ -43,13 +45,16 @@ public class AuthService {
     public void createDefaultAdminIfNotExists() {
         if (adminRepository.count() == 0) {
             Admin defaultAdmin = new Admin();
-            defaultAdmin.setUsername("admin");
-            defaultAdmin.setPassword("admin123");
-            defaultAdmin.setNom("Administrateur");
-            defaultAdmin.setPrenom("Principal");
-            defaultAdmin.setEmail("admin@agence-premium.tn");
+            defaultAdmin.setUsername("fedy");
+            defaultAdmin.setPassword("fedy@hajri");
+            defaultAdmin.setNom("Hajri");
+            defaultAdmin.setPrenom("Fedy");
+            defaultAdmin.setEmail("fedy@hajriimmo.com");
             defaultAdmin.setActif(true);
             adminRepository.save(defaultAdmin);
+
+        } else {
+            log.info("ℹ️  Un administrateur existe déjà dans la base de données");
         }
     }
 

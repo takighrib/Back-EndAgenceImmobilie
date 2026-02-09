@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*") // ✅ Changé pour accepter votre domaine de production
 public class AuthController {
 
     private final AuthService authService;
@@ -35,6 +35,6 @@ public class AuthController {
     @PostMapping("/init")
     public ResponseEntity<String> initDefaultAdmin() {
         authService.createDefaultAdminIfNotExists();
-        return ResponseEntity.ok("Admin par défaut créé si nécessaire");
+        return ResponseEntity.ok("Vérification de l'admin effectuée");
     }
 }
