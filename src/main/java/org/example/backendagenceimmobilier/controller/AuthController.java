@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*") // ✅ Changé pour accepter votre domaine de production
+@CrossOrigin(origins = {"https://hajrimmo.tn", "https://www.hajrimmo.tn"})
 public class AuthController {
 
     private final AuthService authService;

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/agence")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"https://hajrimmo.tn", "https://www.hajrimmo.tn"})
 public class AgenceController {
 
     private final AgenceService agenceService;

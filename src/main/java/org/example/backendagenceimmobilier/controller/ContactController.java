@@ -13,7 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/contact")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"https://hajrimmo.tn", "https://www.hajrimmo.tn"})
 public class ContactController {
 
     private final ContactService contactService;

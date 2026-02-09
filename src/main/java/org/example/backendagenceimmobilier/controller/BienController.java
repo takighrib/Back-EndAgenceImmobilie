@@ -14,7 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/biens")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = {"https://hajrimmo.tn", "https://www.hajrimmo.tn"})
 public class BienController {
 
     private final BienService bienService;

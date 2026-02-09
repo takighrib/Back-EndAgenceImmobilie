@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/upload")
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"https://hajrimmo.tn", "https://www.hajrimmo.tn"})
 @Slf4j
 public class ImageUploadController {
 
