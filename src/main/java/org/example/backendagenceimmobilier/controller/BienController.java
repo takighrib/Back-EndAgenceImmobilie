@@ -4,6 +4,7 @@ package org.example.backendagenceimmobilier.controller;
 import jakarta.validation.Valid;
 import org.example.backendagenceimmobilier.model.BienImmobilier;
 import org.example.backendagenceimmobilier.model.TypeTransaction;
+import org.example.backendagenceimmobilier.model.Villa;
 import org.example.backendagenceimmobilier.service.BienService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -88,6 +89,8 @@ public class BienController {
             @PathVariable Long id,
             @RequestBody BienImmobilier bien
     ) {
+        System.out.println("Type reçu: " + bien.getClass().getSimpleName());
+        System.out.println("Jardin: " + (bien instanceof Villa ? ((Villa)bien).getJardin() : "N/A"));
         return bienService.getBienById(id)
                 .map(existing -> {
                     bien.setId(id);
