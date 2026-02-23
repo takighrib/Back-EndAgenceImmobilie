@@ -38,6 +38,6 @@ public class Villa extends BienImmobilier {
     @Override
     @Transient
     public String getTypeBien() {
-        return "Appartement";
+        return "Villa";
     }
 }

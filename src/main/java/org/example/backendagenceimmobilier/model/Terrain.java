@@ -25,6 +25,6 @@ public class Terrain extends BienImmobilier {
     @Override
     @Transient
     public String getTypeBien() {
-        return "Appartement";
+        return "Terrain";
     }
 }

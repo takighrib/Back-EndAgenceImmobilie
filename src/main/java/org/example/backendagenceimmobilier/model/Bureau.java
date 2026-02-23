@@ -33,6 +33,6 @@ public class Bureau extends BienImmobilier {
     @Override
     @Transient
     public String getTypeBien() {
-        return "Appartement";
+        return "Bureau";
     }
 }

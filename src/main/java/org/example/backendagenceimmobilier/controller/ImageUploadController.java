@@ -74,7 +74,7 @@ public class ImageUploadController {
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
             // ✅ URL COMPLÈTE pointant vers Spring Boot
-            String imageUrl = "http://localhost:8080/uploads/images/" + filename;
+            String imageUrl = "/uploads/images/" + filename;
 
             log.info("════════════════════════════════════════════════════");
             log.info("📤 IMAGE UPLOADÉE AVEC SUCCÈS");

@@ -34,6 +34,6 @@ public class Maison extends BienImmobilier {
     @Override
     @Transient
     public String getTypeBien() {
-        return "Appartement";
+        return "Maison";
     }
 }

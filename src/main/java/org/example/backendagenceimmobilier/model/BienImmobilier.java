@@ -90,17 +90,16 @@ public abstract class BienImmobilier {
         datePublication = LocalDateTime.now();
         dateModification = LocalDateTime.now();
     }
-
+@PostLoad
+@PostPersist
+@PostUpdate
+protected void updateTypeBien() {
+    this.typeBien = this.getClass().getSimpleName();
+}
     @PreUpdate
     protected void onUpdate() {
         dateModification = LocalDateTime.now();
     }
 
-    // ✅ Méthode pour obtenir le type dynamiquement
-    @PostLoad
-    @PostPersist
-    @PostUpdate
-    protected void updateTypeBien() {
-        this.typeBien = this.getClass().getSimpleName();
-    }
+
 }
