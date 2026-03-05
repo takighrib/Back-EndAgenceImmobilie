@@ -82,6 +82,7 @@ public class BienService {
 
                 // Supprimer l'id pour forcer la création
                 bien.setId(null);
+                bien.setReference(existingBien.getReference()); // ← conserver la référence
 
                 // Associer les images au nouveau bien
                 if (bien.getImages() != null) {

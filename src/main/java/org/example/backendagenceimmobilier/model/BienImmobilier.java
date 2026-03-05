@@ -36,6 +36,8 @@ public abstract class BienImmobilier {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "reference", unique = true, updatable = false)
+    private String reference;
     @Column(nullable = false)
     private String titre;
 
@@ -89,6 +91,10 @@ public abstract class BienImmobilier {
     protected void onCreate() {
         datePublication = LocalDateTime.now();
         dateModification = LocalDateTime.now();
+        // Générer la référence une seule fois
+        if (this.reference == null) {
+            this.reference = "HI-" + System.currentTimeMillis();
+        }
     }
 @PostLoad
 @PostPersist
