@@ -14,26 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class Appartement extends BienImmobilier {
-
-    private Integer nombrePieces;
-
-    private Integer nombreChambres;
-
-    private Integer nombreSallesBain;
-
-    private Integer etage;
-
-    private Boolean ascenseur = false;
-
-    private Boolean balcon = false;
-
-    private Boolean parking = false;
-
-    private Boolean climatisation = false;
-
-    private Boolean meuble = false;
     @Override
     @Transient
     public String getTypeBien() {

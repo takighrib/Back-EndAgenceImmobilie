@@ -14,23 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class Maison extends BienImmobilier {
-
-    private Integer nombrePieces;
-
-    private Integer nombreChambres;
-
-    private Integer nombreSallesBain;
-
-    private Boolean jardin = false;
-
-    private Boolean garage = false;
-
-    private Boolean piscine = false;
-
-    private Boolean climatisation = false;
-
     @Override
     @Transient
     public String getTypeBien() {

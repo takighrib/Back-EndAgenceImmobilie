@@ -79,6 +79,38 @@ public abstract class BienImmobilier {
 
     private Integer ordreAffichage = 0;
 
+
+private Integer nombrePieces;
+private Integer nombreChambres;
+private Integer nombreSallesBain;
+
+// Équipements extérieurs
+private Boolean jardin = false;
+private Boolean garage = false;
+private Boolean piscine = false;
+
+// Confort
+private Boolean climatisation = false;
+private Boolean parking = false;
+private Boolean balcon = false;
+private Boolean meuble = false;
+private Boolean ascenseur = false;
+private Boolean gardien = false;
+
+// Étages
+private Integer etage;
+private Integer nombreEtages;
+
+// Bureau
+private Double superficieBureau;
+private Integer nombreBureaux;
+private Boolean securite = false;
+
+// Terrain
+private String typeConstruction;
+private Boolean viabilise = false;
+private String zonage;
+
     // ✅ CORRECTION : Relation unidirectionnelle simplifiée
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ImageBien> images = new ArrayList<>();

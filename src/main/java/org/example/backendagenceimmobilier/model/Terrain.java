@@ -13,15 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class Terrain extends BienImmobilier {
-
-    private String typeConstruction; // "Constructible", "Agricole", etc.
-
-    private Boolean viabilise = false; // Eau, électricité, etc.
-
-    private String zonage; // "Résidentiel", "Commercial", "Industriel"
-
     @Override
     @Transient
     public String getTypeBien() {

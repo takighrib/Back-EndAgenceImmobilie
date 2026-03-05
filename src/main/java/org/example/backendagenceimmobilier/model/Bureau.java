@@ -14,22 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
-@AllArgsConstructor
 public class Bureau extends BienImmobilier {
-
-    private Double superficieBureau;
-
-    private Integer nombreBureaux;
-
-    private Boolean parking = false;
-
-    private Boolean climatisation = false;
-
-    private Boolean securite = false;
-
-    private Integer etage;
-
-    private Boolean ascenseur = false;
     @Override
     @Transient
     public String getTypeBien() {
